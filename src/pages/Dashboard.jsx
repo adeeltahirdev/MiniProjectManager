@@ -1,14 +1,19 @@
+import { useSearchParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
+import CreateProject from "../components/CreateProject";
+import { useState } from "react";
 
 function Dashboard() {
 
-    const {projects, createProject} = useProjects()
+    const {projects} = useProjects()
+
+    const [showCreateform, setShowCreateForm] = useState(false)
 
     function handleCreate() {
-        createProject(
-            'Test Project',
-            'This project was created through Context API.'
-        )
+        
+        setShowCreateForm(true)
+        
+        
     }
 
     return(
@@ -16,6 +21,8 @@ function Dashboard() {
             <h1>Dashboard</h1>
 
             <button onClick={handleCreate}>Create test project</button>
+
+            {showCreateform && <CreateProject onClose={() => setShowCreateForm(false)}/>}
 
             {projects.map(project => (
                 <div key={project.id}>

@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { useProjects } from "../context/ProjectContext"
 
-function CreateProject() {
+function CreateProject({onClose}) {
 
     const {createProject} = useProjects()
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [error, setError] = useState('')
 
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault()
 
         setError('')
@@ -23,11 +23,13 @@ function CreateProject() {
         setName('')
         setDescription('')
 
+        onClose?.()
+
     }
     
     return(
-        <div className="container">
-            <form className="login-form" onSubmit={handleSubmit}>
+        <div className="container" onClick={onClose}>
+            <form className="login-form" onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
                 <h2>Create Project</h2>
 
                 <div className="form-group">
@@ -45,6 +47,7 @@ function CreateProject() {
                     <label htmlFor="description">Description</label>
                     <textarea 
                         id="description"
+                        className="project-description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     >

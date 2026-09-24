@@ -154,6 +154,67 @@
   font-weight: bold;
 }
 
+/* ---------- Modal overlay (wraps CreateProject) ---------- */
+.container {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 25, 40, 0.35);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 20px 40px;
+  z-index: 50;
+  overflow-y: auto;
+}
+
+/* ---------- Textarea needs its own sizing ---------- */
+.project-description {
+  width: 100%;
+  padding: 9px 11px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: #23262b;
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  border-radius: 6px;
+  outline: none;
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.45;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.project-description::placeholder {
+  color: #9aa0a8;
+}
+
+.project-description:hover {
+  border-color: #cfd3d9;
+}
+
+.project-description:focus {
+  border-color: #98a3d8;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.12);
+}
+
+.container .login-form {
+  padding: 24px 24px 22px;
+  gap: 14px;
+  box-shadow: 0 16px 40px rgba(20, 25, 40, 0.16);
+  animation: modal-in 160ms ease-out;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ---------- Small screens ---------- */
 @media (max-width: 420px) {
   .login-form {
