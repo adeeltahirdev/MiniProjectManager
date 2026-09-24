@@ -1,13 +1,13 @@
-import { useSearchParams } from "react-router-dom";
-import { useProjects } from "../context/ProjectContext";
 import CreateProject from "../components/CreateProject";
 import { useState } from "react";
+import { useProjects } from "../context/ProjectContext";
+import ProjectCard from "../components/ProjectCard";
 
 function Dashboard() {
 
-    const {projects} = useProjects()
-
     const [showCreateform, setShowCreateForm] = useState(false)
+
+    const {projects} = useProjects()
 
     function handleCreate() {
         
@@ -17,20 +17,26 @@ function Dashboard() {
     }
 
     return(
-        <div>
-            <h1>Dashboard</h1>
+        <>
+            <div>
+                <h1>Dashboard</h1>
 
-            <button onClick={handleCreate}>Create test project</button>
+                <button onClick={handleCreate}>Create test project</button>
 
-            {showCreateform && <CreateProject onClose={() => setShowCreateForm(false)}/>}
+                {showCreateform && <CreateProject onClose={() => setShowCreateForm(false)}/>}
 
-            {projects.map(project => (
-                <div key={project.id}>
-                    <h3>{project.name}</h3>
-                    <p>{project.description}</p>
-                </div>
-            ))}
-        </div>        
+                
+            </div>
+
+            <div className="project-grid">
+                {projects.map(project => (
+                    <ProjectCard 
+                        key={project.id}
+                        project={project}
+                    />
+                ))}
+            </div>
+        </>
     );
 }
 

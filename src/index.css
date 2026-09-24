@@ -215,6 +215,128 @@
   }
 }
 
+/* ---------- Grid wrapper ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: #fff;
+  border: 1px solid #e3e5e9;
+  border-radius: 8px;
+  padding: 16px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.card:hover {
+  border-color: #d3d6db;
+  box-shadow: 0 1px 3px rgba(20, 25, 40, 0.05);
+}
+
+/* ---------- Header ---------- */
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1f24;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* ---------- Description ---------- */
+.card-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #6a7078;
+  line-height: 1.45;
+  height: 38px;
+  overflow: hidden;
+}
+
+/* ---------- Actions ---------- */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f1f3;
+}
+
+.edit-btn,
+.del-btn {
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.edit-btn {
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  color: #333840;
+}
+
+.edit-btn:hover {
+  background: #f2f3f5;
+  border-color: #cfd3d9;
+}
+
+.edit-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.18);
+}
+
+.del-btn {
+  background: #fff;
+  border: 1px solid #f0d5d5;
+  color: #b54545;
+  margin-left: 8px;
+}
+
+.del-btn:hover {
+  background: #fdf3f3;
+  border-color: #e9c2c2;
+}
+
+.del-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 90, 90, 0.18);
+}
+
 /* ---------- Small screens ---------- */
 @media (max-width: 420px) {
   .login-form {
