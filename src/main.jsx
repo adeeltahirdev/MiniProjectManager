@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 import { AuthProvider } from './context/AuthContext.jsx'
+import { Projectprovider } from './context/ProjectContext.jsx'
+
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
 // Routes
@@ -54,7 +56,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router}/>
+      <Projectprovider>
+        <RouterProvider router={router}/>
+      </Projectprovider>
     </AuthProvider>
   </StrictMode>,
 )
