@@ -1,18 +1,29 @@
-import { useAuth } from "../context/AuthContext";
+import { useProjects } from "../context/ProjectContext";
 
 function Dashboard() {
 
-    const {user, login, logout} = useAuth()
+    const {projects, createProject} = useProjects()
+
+    function handleCreate() {
+        createProject(
+            'Test Project',
+            'This project was created through Context API.'
+        )
+    }
 
     return(
-        <>
-            <h1>Dashboard {user ? user.username : 'Guest'}</h1>
+        <div>
+            <h1>Dashboard</h1>
 
-            <button onClick={() => login('Adeel')}>Login</button>
+            <button onClick={handleCreate}>Create test project</button>
 
-            <button onClick={logout}>Logout</button>
-        </>
-        
+            {projects.map(project => (
+                <div key={project.id}>
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                </div>
+            ))}
+        </div>        
     );
 }
 
