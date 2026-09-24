@@ -101,12 +101,41 @@ export function AuthProvider({children}) {
         })
     }
 
+    function forgotPassword(email) {
+        setLoading(true)
+
+        return new Promise(resolve => {
+            setTimeout(() => {
+
+                const findingUserForLink = users.find(user => user.email === email)
+
+                if (!findingUserForLink) {
+                    setLoading(false)
+
+                    resolve({
+                        success: false,
+                        message: 'No account exists with this email'
+                    })
+                    return
+                }
+
+                setLoading(false)
+
+                resolve({
+                    success: true,
+                    message: 'Password reset link sent!'
+                })
+
+            }, 800)
+        })
+    }
+
     function logout() {
         setUser(null)
     }
 
     return (
-        <AuthContext.Provider value={{user, login, logout, loading, register}}>
+        <AuthContext.Provider value={{user, login, logout, loading, register, forgotPassword}}>
             {children}
         </AuthContext.Provider>
     );

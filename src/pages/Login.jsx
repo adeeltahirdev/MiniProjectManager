@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -54,6 +54,10 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
+
+                <Link to={'/forgot-password'}>
+                    <p className="forgot-link">Forgot Password?</p>
+                </Link>
 
                 {error && <p className="error-message">{error}</p>}
 

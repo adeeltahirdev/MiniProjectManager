@@ -118,6 +118,21 @@
   cursor: default;
 }
 
+/* ---------- Forgot password link ---------- */
+.forgot-link {
+  margin: -6px 0 0;
+  align-self: flex-end;
+  font-size: 12.5px;
+  color: hsl(229, 49%, 52%);
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+
+.forgot-link:hover {
+  color: hsl(229, 49%, 58%);
+  text-decoration: underline;
+}
+
 /* ---------- Error Message ---------- */
 .error-message {
   padding: 10px 15px;
