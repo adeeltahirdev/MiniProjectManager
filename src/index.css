@@ -337,7 +337,72 @@
   box-shadow: 0 0 0 3px rgba(220, 90, 90, 0.18);
 }
 
+/* ---------- Dashboard header ---------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e3e5e9;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c1f24;
+  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------- Create button ---------- */
+.craete-btn {
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 8px 16px;
+  color: #fff;
+  background: #4a5fc1;
+  border: 1px solid #4053b0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.craete-btn:hover {
+  background: #4256b4;
+}
+
+.craete-btn:active {
+  background: #3c4ea5;
+}
+
+.craete-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.25);
+}
+
 /* ---------- Small screens ---------- */
+@media (max-width: 640px) {
+  .header {
+    padding: 16px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  .craete-btn {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 420px) {
   .login-form {
     padding: 22px 18px 20px;

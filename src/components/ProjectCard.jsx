@@ -1,6 +1,9 @@
+import { useProjects } from "../context/ProjectContext";
 
 
-function ProjectCard({project}) {
+function ProjectCard({project, onEdit}) {
+
+    const {deleteProject} = useProjects()
 
   return (
     <div className="card">
@@ -11,8 +14,8 @@ function ProjectCard({project}) {
           <p>{project.description}</p>
 
           <div className="card-action">
-            <button className="edit-btn">Edit</button>
-            <button className="del-btn">Delete</button>
+            <button className="edit-btn" onClick={() => onEdit(project)}>Edit</button>
+            <button className="del-btn" onClick={() => deleteProject(project.id)}>Delete</button>
           </div>
         </div>
   );

@@ -1,11 +1,13 @@
-import CreateProject from "../components/CreateProject";
 import { useState } from "react";
+import CreateProject from "../components/CreateProject";
 import { useProjects } from "../context/ProjectContext";
 import ProjectCard from "../components/ProjectCard";
+import Editproject from "../components/EditProject";
 
 function Dashboard() {
 
     const [showCreateform, setShowCreateForm] = useState(false)
+    const [editingProject, setEditingProject] = useState(null)
 
     const {projects} = useProjects()
 
@@ -16,15 +18,28 @@ function Dashboard() {
         
     }
 
+    function handleEdit(project) {
+        
+        setEditingProject(project)
+
+    }
+
     return(
         <>
-            <div>
+            <div className="header">
                 <h1>Dashboard</h1>
 
-                <button onClick={handleCreate}>Create test project</button>
+                <button className="craete-btn" onClick={handleCreate}>Create project</button>
+            </div>
+
+            <div>
 
                 {showCreateform && <CreateProject onClose={() => setShowCreateForm(false)}/>}
 
+                {editingProject && <Editproject 
+                    project={editingProject}
+                    onClose={() => setEditingProject(null)}
+                />}
                 
             </div>
 
@@ -33,6 +48,7 @@ function Dashboard() {
                     <ProjectCard 
                         key={project.id}
                         project={project}
+                        onEdit={handleEdit}
                     />
                 ))}
             </div>

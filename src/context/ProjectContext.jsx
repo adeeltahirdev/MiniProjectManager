@@ -6,10 +6,9 @@ const ProjectContext = createContext()
 export function Projectprovider({ children }) {
 
     const [projects, setProjects] = useState(initialprojects)
-    const [loading, setLoading] = useState(false)
 
     function createProject(name, description) {
-
+        
         const newproject = {
             id: Date.now(),
             name,
@@ -22,8 +21,34 @@ export function Projectprovider({ children }) {
 
     }
 
+    function deleteProject(id) {
+
+        setProjects(
+            projects.filter(project => project.id !== id)
+        )
+
+    }
+
+    function updateProject(id, name, description) {
+
+        setProjects(p => {
+            return p.map(project => {
+                
+                if (project.id === id) {
+                    return {
+                        ...project,
+                        name: name,
+                        description: description,
+                    }
+                }
+
+                return project
+            })
+        })
+    }
+
     return (
-        <ProjectContext.Provider value={{projects, createProject}}>
+        <ProjectContext.Provider value={{projects, createProject, deleteProject, updateProject}}>
             {children}
         </ProjectContext.Provider>
     )
