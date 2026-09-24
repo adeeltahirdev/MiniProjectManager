@@ -133,13 +133,23 @@
   text-decoration: underline;
 }
 
-/* ---------- Error Message ---------- */
+/* ---------- Messages ---------- */
 .error-message {
   padding: 10px 15px;
   border: 1px solid #dc3545;
   border-radius: 5px;
   color: #dc3545;
   background-color: #f8d7da;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.success-message {
+  padding: 10px 15px;
+  border: 1px solid #198754;
+  border-radius: 5px;
+  color: #198754;
+  background-color: #d1e7dd;
   font-size: 1rem;
   font-weight: bold;
 }
