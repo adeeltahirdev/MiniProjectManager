@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
 
 
@@ -14,6 +15,9 @@ function ProjectCard({project, onEdit}) {
           <p>{project.description}</p>
 
           <div className="card-action">
+            <Link to={`/projects/${project.id}`}>
+              <button className="view-btn">view Project</button>
+            </Link>
             <button className="edit-btn" onClick={() => onEdit(project)}>Edit</button>
             <button className="del-btn" onClick={() => deleteProject(project.id)}>Delete</button>
           </div>
