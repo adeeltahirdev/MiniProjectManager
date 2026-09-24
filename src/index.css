@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Page shell ---------- */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f6f7f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  color: #1c1f24;
+}
+
+/* ---------- Card ---------- */
+.login-form {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid #e3e5e9;
+  border-radius: 8px;
+  padding: 28px 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 1px 2px rgba(20, 25, 40, 0.04);
+}
+
+.login-form h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1c1f24;
+  letter-spacing: -0.01em;
+}
+
+.login-form > p {
+  margin: -8px 0 6px;
+  font-size: 13.5px;
+  color: #6a7078;
+  line-height: 1.4;
+}
+
+/* ---------- Fields ---------- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333840;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 9px 11px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: #23262b;
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.form-group input::placeholder {
+  color: #9aa0a8;
+}
+
+.form-group input:hover {
+  border-color: #cfd3d9;
+}
+
+.form-group input:focus {
+  border-color: #98a3d8;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.12);
+}
+
+/* ---------- Submit button ---------- */
+.login-form button[type="submit"] {
+  margin-top: 6px;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background: hsl(229, 49%, 52%);
+  border: 1px solid #4053b0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.login-form button[type="submit"]:hover {
+  background: hsl(229, 49%, 56%);
+}
+
+.login-form button[type="submit"]:active {
+  background: hsl(229, 49%, 60%);
+}
+
+.login-form button[type="submit"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.25);
+}
+
+.login-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 420px) {
+  .login-form {
+    padding: 22px 18px 20px;
+    border-radius: 6px;
+  }
+
+  .container {
+    padding: 16px;
+  }
+}
