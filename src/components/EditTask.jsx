@@ -80,7 +80,7 @@ function EditTask({task, onClose}) {
                     id="user"
                     className="user-selection"
                     value={assignedUser}
-                    onChange={(e) => setAssignedUser(e.target.value)}
+                    onChange={(e) => setAssignedUser(Number(e.target.value))}
                   >
                     <option value=''>Select a user</option>
                     {users.map(user => (

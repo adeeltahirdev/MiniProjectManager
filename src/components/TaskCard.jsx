@@ -1,8 +1,13 @@
 import { useTasks } from "../context/TaskContext";
+import { users } from "../data/users";
 
 function TaskCard({ task, onEdit }) {
 
   const {deleteTask} = useTasks()
+
+  const assignedUser = users.find(
+    user => user.id === task.assignedUser
+  )
 
   return (
     <div className="task-card">
@@ -26,7 +31,7 @@ function TaskCard({ task, onEdit }) {
 
       <p className="task-user">
         <span>Assigned User</span>
-        <span>{task.assignedUser || "Unassigned"}</span>
+        <span>{assignedUser ? assignedUser.username : "Unassigned"}</span>
       </p>
 
       <span className="task-due">
