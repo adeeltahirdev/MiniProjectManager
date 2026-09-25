@@ -1,6 +1,6 @@
 import { useTasks } from "../context/TaskContext";
 
-function TaskCard({ task }) {
+function TaskCard({ task, onEdit }) {
 
   const {deleteTask} = useTasks()
 
@@ -35,7 +35,7 @@ function TaskCard({ task }) {
       </span>
 
       <div className="action-btn">
-        <button className="edit-btn">Edit</button>
+        <button className="edit-btn" onClick={() => onEdit(task)}>Edit</button>
         <button className="del-btn" onClick={() => deleteTask(task.id)}>Delete</button>
       </div>
     </div>

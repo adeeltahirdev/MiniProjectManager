@@ -4,6 +4,7 @@ import { useTasks } from "../context/TaskContext";
 import TaskCard from "../components/TaskCard";
 import { useState } from "react";
 import CreateTask from "../components/CreateTask";
+import EditTask from "../components/EditTask";
 
 function ProjectDetails() {
   const { projectId } = useParams();
@@ -11,9 +12,14 @@ function ProjectDetails() {
   const { tasks } = useTasks()
 
   const [showCreateForm, setShowCreateForm] = useState(false)
+  const [editTask, setEditTask] = useState(null)
 
   function handleAddTask() {
     setShowCreateForm(true)
+  }
+
+  function handleEdit(task) {
+    setEditTask(task)
   }
 
   const idInt = parseInt(projectId, 10);
@@ -48,6 +54,8 @@ function ProjectDetails() {
 
       {showCreateForm && <CreateTask onClose={() => setShowCreateForm(false)} />}
 
+      {editTask && <EditTask task={editTask} onClose={() => setEditTask(null)}/>}
+
       <div className="project-details">
         <h2 className="name">{project.name}</h2>
         <p className="description">{project.description}</p>
@@ -58,6 +66,7 @@ function ProjectDetails() {
             <TaskCard 
                 key={task.id}
                 task={task}
+                onEdit={handleEdit}
             />
         ))}
       </div>
