@@ -1,9 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
+import { useTasks } from "../context/TaskContext";
+import TaskCard from "../components/TaskCard";
 
 function ProjectDetails() {
   const { projectId } = useParams();
   const { projects } = useProjects();
+  const { tasks } = useTasks()
 
   const idInt = parseInt(projectId, 10);
 
@@ -26,15 +29,27 @@ function ProjectDetails() {
     );
   }
 
+  const projectTask = tasks.filter(t => t.projectId === idInt)
+
   return (
     <>
       <div className="header">
         <h1>Project Details</h1>
+        <button className="create-btn">+ Add Task</button>
       </div>
 
       <div className="project-details">
         <h2 className="name">{project.name}</h2>
         <p className="description">{project.description}</p>
+      </div>
+
+      <div className="task-grid">
+        {projectTask.map(task => (
+            <TaskCard 
+                key={task.id}
+                task={task}
+            />
+        ))}
       </div>
     </>
   );

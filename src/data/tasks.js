@@ -24,7 +24,7 @@ export const tasks = [
         id: 3,
         projectId: 2,
         title: "Make the structure of the app",
-        status: "todo",
+        status: "done",
         priority: "high",
         assignedUser: 1,
         dueDate: "2026-10-01"

@@ -29,7 +29,7 @@ function Dashboard() {
             <div className="header">
                 <h1>Dashboard</h1>
 
-                <button className="craete-btn" onClick={handleCreate}>Create project</button>
+                <button className="create-btn" onClick={handleCreate}>Create project</button>
             </div>
 
             <div>
