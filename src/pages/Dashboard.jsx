@@ -5,12 +5,13 @@ import ProjectCard from "../components/ProjectCard";
 import Editproject from "../components/EditProject";
 import Loader from "../components/Loader";
 import Success from "../components/Success";
+import ErrorMessage from "../components/ErrorMessage";
 
 function Dashboard() {
   const [showCreateform, setShowCreateForm] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
 
-  const { projects, loadingOperation, successMessage } = useProjects();
+  const { projects, loadingOperation, successMessage, error } = useProjects();
 
   function handleCreate() {
     setShowCreateForm(true);
@@ -45,6 +46,10 @@ function Dashboard() {
 
       {successMessage && (
         <Success message={successMessage}/>
+      )}
+
+      {error && (
+        <ErrorMessage message={error}/>
       )}
 
       {loadingOperation === "create" ? (

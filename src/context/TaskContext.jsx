@@ -8,6 +8,7 @@ export function TaskProvider({children}) {
     const [tasks, setTasks] = useState(initialTasks)
     const [loadingOperation, setLoadingOperation] = useState(null)
     const [successMessage, setSuccessMessage] = useState('')
+    const [error, setError] = useState('')
 
     useEffect(() => {
         if (!successMessage) {
@@ -21,10 +22,23 @@ export function TaskProvider({children}) {
         return () => clearTimeout(timer)
     }, [successMessage])
 
+    useEffect(() => {
+        if (!error) {
+            return
+        }
+
+        const timer = setTimeout(() => {
+            setError('')
+        }, 3000);
+
+        return () => clearTimeout(timer)
+    }, [error])
+
     function createTask(projectId, title, status, priority, assignedUser, dueDate) {
 
         setLoadingOperation('create')
         setSuccessMessage('')
+        setError('')
 
         const newTask = {
             id: Date.now(),
@@ -37,6 +51,15 @@ export function TaskProvider({children}) {
         }
 
         setTimeout(() => {
+
+            const failed = Math.random() < 0.3
+
+            if (failed) {
+                setLoadingOperation(null)
+                setError('Something went wrong. Try again later')
+                return
+            }
+
             setTasks(t => [
             ...t,
             newTask
@@ -50,8 +73,18 @@ export function TaskProvider({children}) {
 
         setLoadingOperation('delete')
         setSuccessMessage('')
+        setError('')
 
         setTimeout(() => {
+
+            const failed = Math.random() < 0.3
+
+            if (failed) {
+                setLoadingOperation(null)
+                setError('Something went wrong. Try again later')
+                return
+            }
+
             setTasks(
             tasks => tasks.filter(task => task.id !== id)
         )
@@ -65,8 +98,18 @@ export function TaskProvider({children}) {
 
         setLoadingOperation('update')
         setSuccessMessage('')
+        setError('')
 
         setTimeout(() => {
+
+            const failed = Math.random() < 0.3
+
+            if (failed) {
+                setLoadingOperation(null)
+                setError('Something went wrong. Try again later')
+                return
+            }
+
             setTasks(tasks => {
             return tasks.map(task => {
                 if (task.id === id) {
@@ -90,7 +133,7 @@ export function TaskProvider({children}) {
     }
 
     return (
-        <TaskContext.Provider value={{tasks, createTask, deleteTask, updateTask, loadingOperation, successMessage}}>
+        <TaskContext.Provider value={{tasks, createTask, deleteTask, updateTask, loadingOperation, successMessage, error}}>
             {children}
         </TaskContext.Provider>
     )

@@ -8,6 +8,7 @@ export function Projectprovider({ children }) {
     const [projects, setProjects] = useState(initialprojects)
     const [loadingOperation, setLoadingOperation] = useState(null)
     const [successMessage, setSuccessMessage] = useState('')
+    const [error, setError] = useState('')
 
     useEffect(() => {
         if (!successMessage) {
@@ -21,10 +22,23 @@ export function Projectprovider({ children }) {
         return () => clearTimeout(timer)
     }, [successMessage])
 
+    useEffect(() => {
+        if (!error) {
+            return
+        }
+
+        const timer = setTimeout(() => {
+            setError('')
+        }, 3000);
+
+        return () => clearTimeout(timer)
+    }, [error])
+
     function createProject(name, description) {
 
         setLoadingOperation('create')
         setSuccessMessage('')
+        setError('')
         
         const newproject = {
             id: Date.now(),
@@ -33,6 +47,15 @@ export function Projectprovider({ children }) {
         }
 
         setTimeout(() => {
+
+            const failed = Math.random() < 0.3
+
+            if (failed) {
+                setLoadingOperation(null)
+                setError('Something went wrong. Try again later')
+                return
+            }
+            
             setProjects(p => [
             ...p, newproject
         ])
@@ -46,8 +69,20 @@ export function Projectprovider({ children }) {
 
         setLoadingOperation('delete')
         setSuccessMessage('')
+        setError('')
+
+        
 
         setTimeout(() => {
+            
+            const failed = Math.random() < 0.3
+
+            if (failed) {
+                setLoadingOperation(null)
+                setError('Something went wrong. Try again later')
+                return
+            }
+
             setProjects(
             p => p.filter(project => project.id !== id)
         )
@@ -61,8 +96,18 @@ export function Projectprovider({ children }) {
 
         setLoadingOperation('update')
         setSuccessMessage('')
+        setError('')
 
         setTimeout(() => {
+
+            const failed = Math.random() < 0.3
+
+            if (failed) {
+                setLoadingOperation(null)
+                setError('Something went wrong. Try again later')
+                return
+            }
+
             setProjects(p => {
             return p.map(project => {
                 
@@ -83,7 +128,7 @@ export function Projectprovider({ children }) {
     }
 
     return (
-        <ProjectContext.Provider value={{projects, createProject, deleteProject, updateProject, loadingOperation, successMessage}}>
+        <ProjectContext.Provider value={{projects, createProject, deleteProject, updateProject, loadingOperation, successMessage, error}}>
             {children}
         </ProjectContext.Provider>
     )

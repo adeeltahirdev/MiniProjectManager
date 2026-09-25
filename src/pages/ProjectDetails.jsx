@@ -7,11 +7,12 @@ import CreateTask from "../components/CreateTask";
 import EditTask from "../components/EditTask";
 import Loader from "../components/Loader";
 import Success from "../components/Success";
+import ErrorMessage from "../components/ErrorMessage";
 
 function ProjectDetails() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const { tasks, loadingOperation, successMessage } = useTasks();
+  const { tasks, loadingOperation, successMessage, error } = useTasks();
 
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editTask, setEditTask] = useState(null);
@@ -64,14 +65,18 @@ function ProjectDetails() {
         <EditTask task={editTask} onClose={() => setEditTask(null)} />
       )}
 
-      {successMessage && (
-        <Success message={successMessage}/>
-      )}
-
       <div className="project-details">
         <h2 className="name">{project.name}</h2>
         <p className="description">{project.description}</p>
       </div>
+
+      {successMessage && (
+        <Success message={successMessage}/>
+      )}  
+
+      {error && (
+        <ErrorMessage message={error}/>
+      )}
 
       {loadingOperation === "create" ? (
         <Loader message="Adding task..." />
