@@ -9,24 +9,24 @@ import EditTask from "../components/EditTask";
 function ProjectDetails() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const { tasks } = useTasks()
+  const { tasks } = useTasks();
 
-  const [showCreateForm, setShowCreateForm] = useState(false)
-  const [editTask, setEditTask] = useState(null)
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [editTask, setEditTask] = useState(null);
 
   function handleAddTask() {
-    setShowCreateForm(true)
+    setShowCreateForm(true);
   }
 
   function handleEdit(task) {
-    setEditTask(task)
+    setEditTask(task);
   }
 
   const idInt = parseInt(projectId, 10);
 
   const project = projects.find((p) => p.id === idInt);
 
-    if (!project) {
+  if (!project) {
     return (
       <>
         <div className="header">
@@ -43,33 +43,44 @@ function ProjectDetails() {
     );
   }
 
-  const projectTask = tasks.filter(t => t.projectId === idInt)
+  const projectTask = tasks.filter((t) => t.projectId === idInt);
 
   return (
     <>
       <div className="header">
         <h1>Project Details</h1>
-        <button className="create-btn" onClick={handleAddTask}>+ Add Task</button>
+        <button className="create-btn" onClick={handleAddTask}>
+          + Add Task
+        </button>
       </div>
 
-      {showCreateForm && <CreateTask onClose={() => setShowCreateForm(false)} />}
+      {showCreateForm && (
+        <CreateTask onClose={() => setShowCreateForm(false)} />
+      )}
 
-      {editTask && <EditTask task={editTask} onClose={() => setEditTask(null)}/>}
+      {editTask && (
+        <EditTask task={editTask} onClose={() => setEditTask(null)} />
+      )}
 
       <div className="project-details">
         <h2 className="name">{project.name}</h2>
         <p className="description">{project.description}</p>
       </div>
 
-      <div className="task-grid">
-        {projectTask.map(task => (
-            <TaskCard 
-                key={task.id}
-                task={task}
-                onEdit={handleEdit}
-            />
-        ))}
-      </div>
+      {projectTask.length === 0 ? (
+        <div className="task-empty">
+          <p>No tasks yet for this project.</p>
+          <button className="create-btn" onClick={handleAddTask}>
+            Add the first task
+          </button>
+        </div>
+      ) : (
+        <div className="task-grid">
+          {projectTask.map((task) => (
+            <TaskCard key={task.id} task={task} onEdit={handleEdit} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

@@ -710,6 +710,26 @@
   cursor: default;
 }
 
+.task-empty {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  text-align: center;
+  color: #6a7078;
+  font-size: 13.5px;
+  background: #fff;
+  border: 1px dashed #e3e5e9;
+  border-radius: 8px;
+}
+
+.task-empty p {
+  margin: 0 0 14px;
+}
+
+.task-empty .create-btn {
+  display: inline-block;
+}
+
 /* ---------- Small screens ---------- */
 @media (max-width: 420px) {
   .task-form {
