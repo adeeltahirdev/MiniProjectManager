@@ -582,14 +582,148 @@
   margin: 0 auto;
 }
 
-/* ---------- Tablet ---------- */
+/* ---------- Task form modal ---------- */
+.task-form {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid #e3e5e9;
+  border-radius: 8px;
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  color: #1c1f24;
+  box-shadow: 0 16px 40px rgba(20, 25, 40, 0.16);
+  animation: task-modal-in 160ms ease-out;
+}
+
+@keyframes task-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-form h2 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1c1f24;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Field group ---------- */
+.task-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.task-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333840;
+}
+
+/* ---------- Inputs, selects, date ---------- */
+.task-group input,
+.task-group select {
+  width: 100%;
+  padding: 9px 11px;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: #23262b;
+  background: #fff;
+  border: 1px solid #dcdfe4;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.task-group input::placeholder {
+  color: #9aa0a8;
+}
+
+.task-group input:hover,
+.task-group select:hover {
+  border-color: #cfd3d9;
+}
+
+.task-group input:focus,
+.task-group select:focus {
+  border-color: #98a3d8;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.12);
+}
+
+/* ---------- Selects (dropdown arrow look) ---------- */
+.task-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236a7078' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 11px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+/* ---------- Date input ---------- */
+.task-group input[type="date"] {
+  cursor: pointer;
+}
+
+/* ---------- Submit button ---------- */
+.add-btn {
+  margin-top: 6px;
+  padding: 9px 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background: #4a5fc1;
+  border: 1px solid #4053b0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.add-btn:hover {
+  background: #4256b4;
+}
+
+.add-btn:active {
+  background: #3c4ea5;
+}
+
+.add-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 95, 193, 0.25);
+}
+
+.add-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 420px) {
+  .task-form {
+    padding: 20px 18px 18px;
+    border-radius: 6px;
+  }
+}
+
 @media (max-width: 1024px) {
   .task-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* ---------- Mobile ---------- */
 @media (max-width: 640px) {
   .task-grid {
     grid-template-columns: 1fr;
@@ -598,7 +732,6 @@
   }
 }
 
-/* ---------- Small screens ---------- */
 @media (max-width: 640px) {
   .project-details {
     padding: 20px 16px 32px;

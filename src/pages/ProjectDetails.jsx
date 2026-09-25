@@ -2,11 +2,19 @@ import { useParams } from "react-router-dom";
 import { useProjects } from "../context/ProjectContext";
 import { useTasks } from "../context/TaskContext";
 import TaskCard from "../components/TaskCard";
+import { useState } from "react";
+import CreateTask from "../components/CreateTask";
 
 function ProjectDetails() {
   const { projectId } = useParams();
   const { projects } = useProjects();
   const { tasks } = useTasks()
+
+  const [showCreateForm, setShowCreateForm] = useState(false)
+
+  function handleAddTask() {
+    setShowCreateForm(true)
+  }
 
   const idInt = parseInt(projectId, 10);
 
@@ -35,8 +43,10 @@ function ProjectDetails() {
     <>
       <div className="header">
         <h1>Project Details</h1>
-        <button className="create-btn">+ Add Task</button>
+        <button className="create-btn" onClick={handleAddTask}>+ Add Task</button>
       </div>
+
+      {showCreateForm && <CreateTask onClose={() => setShowCreateForm(false)} />}
 
       <div className="project-details">
         <h2 className="name">{project.name}</h2>
