@@ -324,14 +324,14 @@
 
 .edit-btn {
   background: #fff;
-  border: 1px solid #dcdfe4;
-  color: #333840;
+  border: 1px solid hsl(45, 100%, 80%);
+  color: #ffc107;
   margin-left: 8px;
 }
 
 .edit-btn:hover {
   background: #f2f3f5;
-  border-color: #cfd3d9;
+  border-color: hsl(45, 100%, 70%);
 }
 
 .edit-btn:focus-visible {

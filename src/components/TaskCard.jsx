@@ -1,4 +1,9 @@
+import { useTasks } from "../context/TaskContext";
+
 function TaskCard({ task }) {
+
+  const {deleteTask} = useTasks()
+
   return (
     <div className="task-card">
       <div className="task-card-header">
@@ -28,6 +33,11 @@ function TaskCard({ task }) {
         <span>Due</span>
         <span>{task.dueDate || "Not set"}</span>
       </span>
+
+      <div className="action-btn">
+        <button className="edit-btn">Edit</button>
+        <button className="del-btn" onClick={() => deleteTask(task.id)}>Delete</button>
+      </div>
     </div>
   );
 }
