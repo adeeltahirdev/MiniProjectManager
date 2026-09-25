@@ -5,6 +5,7 @@ import './index.css'
 
 import { AuthProvider } from './context/AuthContext.jsx'
 import { Projectprovider } from './context/ProjectContext.jsx'
+import { TaskProvider } from './context/TaskContext.jsx'
 
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
@@ -57,7 +58,9 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <Projectprovider>
-        <RouterProvider router={router}/>
+        <TaskProvider>
+          <RouterProvider router={router}/>
+        </TaskProvider>        
       </Projectprovider>
     </AuthProvider>
   </StrictMode>,
