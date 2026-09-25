@@ -6,8 +6,11 @@ const TaskContext = createContext()
 export function TaskProvider({children}) {
 
     const [tasks, setTasks] = useState(initialTasks)
+    const [loadingOperation, setLoadingOperation] = useState(null)
 
     function createTask(projectId, title, status, priority, assignedUser, dueDate) {
+
+        setLoadingOperation('create')
 
         const newTask = {
             id: Date.now(),
@@ -19,23 +22,34 @@ export function TaskProvider({children}) {
             dueDate,
         }
 
-        setTasks(t => [
+        setTimeout(() => {
+            setTasks(t => [
             ...t,
             newTask
         ])
+            setLoadingOperation(null)
+        }, 800);
     }
 
     function deleteTask(id) {
 
-        setTasks(
+        setLoadingOperation('delete')
+
+        setTimeout(() => {
+            setTasks(
             tasks => tasks.filter(task => task.id !== id)
         )
+            setLoadingOperation(null)
+        }, 800);
         
     }
 
     function updateTask(id, title, status, priority, assignedUser, dueDate) {
 
-        setTasks(tasks => {
+        setLoadingOperation('update')
+
+        setTimeout(() => {
+            setTasks(tasks => {
             return tasks.map(task => {
                 if (task.id === id) {
                     return {
@@ -51,11 +65,13 @@ export function TaskProvider({children}) {
                 return task
             })
         })
+            setLoadingOperation(null)
+        }, 800);
 
     }
 
     return (
-        <TaskContext.Provider value={{tasks, createTask, deleteTask, updateTask}}>
+        <TaskContext.Provider value={{tasks, createTask, deleteTask, updateTask, loadingOperation}}>
             {children}
         </TaskContext.Provider>
     )

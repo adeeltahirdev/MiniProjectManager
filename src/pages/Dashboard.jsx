@@ -3,12 +3,13 @@ import CreateProject from "../components/CreateProject";
 import { useProjects } from "../context/ProjectContext";
 import ProjectCard from "../components/ProjectCard";
 import Editproject from "../components/EditProject";
+import Loader from "../components/Loader";
 
 function Dashboard() {
   const [showCreateform, setShowCreateForm] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
 
-  const { projects } = useProjects();
+  const { projects, loadingOperation } = useProjects();
 
   function handleCreate() {
     setShowCreateForm(true);
@@ -41,7 +42,13 @@ function Dashboard() {
         )}
       </div>
 
-      {projects.length === 0 ? (
+      {loadingOperation === "create" ? (
+        <Loader message="Adding project..." />
+      ) : loadingOperation === "update" ? (
+        <Loader message="Updating project..." />
+      ) : loadingOperation === "delete" ? (
+        <Loader message="Deleting project..." />
+      ) : projects.length === 0 ? (
         <div className="task-empty">
           <p>No projects to show here yet.</p>
           <button className="create-btn" onClick={handleCreate}>

@@ -133,27 +133,6 @@
   text-decoration: underline;
 }
 
-/* ---------- Messages ---------- */
-.error-message {
-  padding: 10px 15px;
-  border: 1px solid #dc3545;
-  border-radius: 5px;
-  color: #dc3545;
-  background-color: #f8d7da;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.success-message {
-  padding: 10px 15px;
-  border: 1px solid #198754;
-  border-radius: 5px;
-  color: #198754;
-  background-color: #d1e7dd;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
 /* ---------- Modal overlay (wraps CreateProject) ---------- */
 .container {
   position: fixed;
@@ -728,6 +707,56 @@
 
 .task-empty .create-btn {
   display: inline-block;
+}
+
+/* ---------- Messages ---------- */
+.error-message {
+  padding: 10px 15px;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  color: #dc3545;
+  background-color: #f8d7da;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.success-message {
+  padding: 10px 15px;
+  border: 1px solid #198754;
+  border-radius: 5px;
+  color: #198754;
+  background-color: #d1e7dd;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.loading-message {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  font-size: 13px;
+  color: #6a7078;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-message::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 2px solid #d3d6db;
+  border-top-color: #4a5fc1;
+  border-radius: 50%;
+  animation: loading-spin 700ms linear infinite;
+}
+
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ---------- Small screens ---------- */

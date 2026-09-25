@@ -5,11 +5,12 @@ import TaskCard from "../components/TaskCard";
 import { useState } from "react";
 import CreateTask from "../components/CreateTask";
 import EditTask from "../components/EditTask";
+import Loader from "../components/Loader";
 
 function ProjectDetails() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const { tasks } = useTasks();
+  const { tasks, loadingOperation } = useTasks();
 
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editTask, setEditTask] = useState(null);
@@ -67,7 +68,13 @@ function ProjectDetails() {
         <p className="description">{project.description}</p>
       </div>
 
-      {projectTask.length === 0 ? (
+      {loadingOperation === "create" ? (
+        <Loader message="Adding task..." />
+      ) : loadingOperation === "update" ? (
+        <Loader message="Updating task..." />
+      ) : loadingOperation === "delete" ? (
+        <Loader message="Deleting task..." />
+      ) : projectTask.length === 0 ? (
         <div className="task-empty">
           <p>No tasks yet for this project.</p>
           <button className="create-btn" onClick={handleAddTask}>
