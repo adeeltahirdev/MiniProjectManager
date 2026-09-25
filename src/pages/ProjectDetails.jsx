@@ -6,11 +6,12 @@ import { useState } from "react";
 import CreateTask from "../components/CreateTask";
 import EditTask from "../components/EditTask";
 import Loader from "../components/Loader";
+import Success from "../components/Success";
 
 function ProjectDetails() {
   const { projectId } = useParams();
   const { projects } = useProjects();
-  const { tasks, loadingOperation } = useTasks();
+  const { tasks, loadingOperation, successMessage } = useTasks();
 
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editTask, setEditTask] = useState(null);
@@ -61,6 +62,10 @@ function ProjectDetails() {
 
       {editTask && (
         <EditTask task={editTask} onClose={() => setEditTask(null)} />
+      )}
+
+      {successMessage && (
+        <Success message={successMessage}/>
       )}
 
       <div className="project-details">

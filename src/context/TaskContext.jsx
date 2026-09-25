@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { tasks as initialTasks } from "../data/tasks"
 
 const TaskContext = createContext()
@@ -7,10 +7,24 @@ export function TaskProvider({children}) {
 
     const [tasks, setTasks] = useState(initialTasks)
     const [loadingOperation, setLoadingOperation] = useState(null)
+    const [successMessage, setSuccessMessage] = useState('')
+
+    useEffect(() => {
+        if (!successMessage) {
+            return
+        }
+
+        const timer = setTimeout(() => {
+            setSuccessMessage('')
+        }, 3000);
+
+        return () => clearTimeout(timer)
+    }, [successMessage])
 
     function createTask(projectId, title, status, priority, assignedUser, dueDate) {
 
         setLoadingOperation('create')
+        setSuccessMessage('')
 
         const newTask = {
             id: Date.now(),
@@ -28,18 +42,21 @@ export function TaskProvider({children}) {
             newTask
         ])
             setLoadingOperation(null)
+            setSuccessMessage('Task created successfully')
         }, 800);
     }
 
     function deleteTask(id) {
 
         setLoadingOperation('delete')
+        setSuccessMessage('')
 
         setTimeout(() => {
             setTasks(
             tasks => tasks.filter(task => task.id !== id)
         )
             setLoadingOperation(null)
+            setSuccessMessage('Task deleted successfully')
         }, 800);
         
     }
@@ -47,6 +64,7 @@ export function TaskProvider({children}) {
     function updateTask(id, title, status, priority, assignedUser, dueDate) {
 
         setLoadingOperation('update')
+        setSuccessMessage('')
 
         setTimeout(() => {
             setTasks(tasks => {
@@ -66,12 +84,13 @@ export function TaskProvider({children}) {
             })
         })
             setLoadingOperation(null)
+            setSuccessMessage('Task updated successfully')
         }, 800);
 
     }
 
     return (
-        <TaskContext.Provider value={{tasks, createTask, deleteTask, updateTask, loadingOperation}}>
+        <TaskContext.Provider value={{tasks, createTask, deleteTask, updateTask, loadingOperation, successMessage}}>
             {children}
         </TaskContext.Provider>
     )
