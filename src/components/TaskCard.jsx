@@ -36,7 +36,7 @@ function TaskCard({ task, onEdit }) {
 
       <span className="task-due">
         <span>Due</span>
-        <span>{task.dueDate || "Not set"}</span>
+        <span>{task.dueDate || "Date not set"}</span>
       </span>
 
       <div className="action-btn">

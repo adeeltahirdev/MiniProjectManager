@@ -53,12 +53,11 @@ function Dashboard() {
         <ErrorMessage message={error}/>
       )}
 
-      {loadingOperation === "create" ? (
-        <Loader message="Adding project..." />
-      ) : loadingOperation === "update" ? (
-        <Loader message="Updating project..." />
-      ) : loadingOperation === "delete" ? (
-        <Loader message="Deleting project..." />
+      {loadingOperation ? (
+        <Loader 
+          operation={loadingOperation}
+          subject='project'
+        />
       ) : projects.length === 0 ? (
         <EmptyState 
           message='No projects to show here yet.'

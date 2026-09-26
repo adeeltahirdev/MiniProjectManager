@@ -79,12 +79,11 @@ function ProjectDetails() {
         <ErrorMessage message={error}/>
       )}
 
-      {loadingOperation === "create" ? (
-        <Loader message="Adding task..." />
-      ) : loadingOperation === "update" ? (
-        <Loader message="Updating task..." />
-      ) : loadingOperation === "delete" ? (
-        <Loader message="Deleting task..." />
+      {loadingOperation ? (
+        <Loader 
+          operation={loadingOperation}
+          subject='task'
+        />
       ) : projectTask.length === 0 ? (
         <EmptyState 
           message='No tasks yet for this project.'
