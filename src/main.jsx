@@ -41,15 +41,19 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: (
+      <ProtectedRoute>
         <Dashboard />
-      // <ProtectedRoute>
-      // </ProtectedRoute>
+      </ProtectedRoute>
   )
   },
 
   {
     path: '/projects/:projectId',
-    element: <ProjectDetails />
+    element: (
+      <ProtectedRoute>
+        <ProjectDetails />
+      </ProtectedRoute>
+    )
   }
 
 ])
