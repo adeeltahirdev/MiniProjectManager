@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { tasks as initialTasks } from "../data/tasks"
+import useAutoDismiss from "../hooks/useAutoDismiss";
 
 const TaskContext = createContext()
 
@@ -7,32 +8,8 @@ export function TaskProvider({children}) {
 
     const [tasks, setTasks] = useState(initialTasks)
     const [loadingOperation, setLoadingOperation] = useState(null)
-    const [successMessage, setSuccessMessage] = useState('')
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        if (!successMessage) {
-            return
-        }
-
-        const timer = setTimeout(() => {
-            setSuccessMessage('')
-        }, 3000);
-
-        return () => clearTimeout(timer)
-    }, [successMessage])
-
-    useEffect(() => {
-        if (!error) {
-            return
-        }
-
-        const timer = setTimeout(() => {
-            setError('')
-        }, 3000);
-
-        return () => clearTimeout(timer)
-    }, [error])
+    const [successMessage, setSuccessMessage] = useAutoDismiss('')
+    const [error, setError] = useAutoDismiss('')
 
     function createTask(projectId, title, status, priority, assignedUser, dueDate) {
 

@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import {projects as initialprojects} from "../data/projects"
+import useAutoDismiss from "../hooks/useAutoDismiss";
 
 const ProjectContext = createContext()
 
@@ -7,32 +8,8 @@ export function Projectprovider({ children }) {
 
     const [projects, setProjects] = useState(initialprojects)
     const [loadingOperation, setLoadingOperation] = useState(null)
-    const [successMessage, setSuccessMessage] = useState('')
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        if (!successMessage) {
-            return
-        }
-
-        const timer = setTimeout(() => {
-            setSuccessMessage('')
-        }, 3000);
-
-        return () => clearTimeout(timer)
-    }, [successMessage])
-
-    useEffect(() => {
-        if (!error) {
-            return
-        }
-
-        const timer = setTimeout(() => {
-            setError('')
-        }, 3000);
-
-        return () => clearTimeout(timer)
-    }, [error])
+    const [successMessage, setSuccessMessage] = useAutoDismiss('')
+    const [error, setError] = useAutoDismiss('')
 
     function createProject(name, description) {
 
