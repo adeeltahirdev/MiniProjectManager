@@ -8,6 +8,7 @@ import EditTask from "../components/EditTask";
 import Loader from "../components/Loader";
 import Success from "../components/Success";
 import ErrorMessage from "../components/ErrorMessage";
+import EmptyState from "../components/EmptyState";
 
 function ProjectDetails() {
   const { projectId } = useParams();
@@ -85,12 +86,11 @@ function ProjectDetails() {
       ) : loadingOperation === "delete" ? (
         <Loader message="Deleting task..." />
       ) : projectTask.length === 0 ? (
-        <div className="task-empty">
-          <p>No tasks yet for this project.</p>
-          <button className="create-btn" onClick={handleAddTask}>
-            Add the first task
-          </button>
-        </div>
+        <EmptyState 
+          message='No tasks yet for this project.'
+          actionLabel='Add first task'
+          onAction={handleAddTask}
+        />
       ) : (
         <div className="task-grid">
           {projectTask.map((task) => (

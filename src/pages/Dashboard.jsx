@@ -6,6 +6,7 @@ import Editproject from "../components/EditProject";
 import Loader from "../components/Loader";
 import Success from "../components/Success";
 import ErrorMessage from "../components/ErrorMessage";
+import EmptyState from "../components/EmptyState";
 
 function Dashboard() {
   const [showCreateform, setShowCreateForm] = useState(false);
@@ -59,12 +60,11 @@ function Dashboard() {
       ) : loadingOperation === "delete" ? (
         <Loader message="Deleting project..." />
       ) : projects.length === 0 ? (
-        <div className="task-empty">
-          <p>No projects to show here yet.</p>
-          <button className="create-btn" onClick={handleCreate}>
-            Add Your first project
-          </button>
-        </div>
+        <EmptyState 
+          message='No projects to show here yet.'
+          actionLabel='Add your first project'
+          onAction={handleCreate}
+        />
       ) : (
         <div className="project-grid">
           {projects.map((project) => (
